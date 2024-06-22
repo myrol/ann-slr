@@ -6,6 +6,7 @@
 \usepackage[sorting=none]{biblatex} 
 \usepackage[most]{tcolorbox} % Codeblocks
 \usepackage{graphicx}
+\usepackage[bottom]{footmisc}
 \DefineBibliographyStrings{ngerman}{ % u.a. -> et al.
    andothers = {et al\adddot}
 }
@@ -43,73 +44,109 @@ $\ll$ Kurz beschreiben $\gg$
 
 Jedes Jahr sterben weltweit ca. 1,19 Millionen Menschen in Verkehrsunfällen
 (RTA, engl.: \enquote{road traffic accident}) \cite{who}.
-Es ist unabdingbar, dass der Straßenbau die Sicherheit der Straßenverkehrsteilnehmer
-priorisiert und das Risiko auf Verkehrsunfälle minimiert.
+Eine umfassende Analyse vorliegender Verkehrsdaten im Hinblick auf potentielle
+Bedrohungen kann dazu beitragen, Baumaßnahmen unfallminimierend zu gestalten.
 \medskip \\
-Es gibt eine Vielzahl an Faktoren, die das Risiko auf RTA erhöhen, wie
-Wetterbedingungen, Straßenkonditionen, Zustand des Fahrers, Lichtverhältnisse,
-Tageszeit und die Verkehrsdichte. \enquote{Machine Learning}-Modelle (ML) sind darauf
-ausgelegt, nicht anhand von spezifischen Anweisungen, sondern allein durch das Erkennen
-von Mustern und Abhängigkeiten mithilfe komplexer Funktionen \cite{predict}
-in Daten Erkenntnisse zu ziehen und Entscheidungen sowie Vorhersagen treffen
-zu können \cite{sap}.
+Vorangehende Analysen von Verkehrsdaten, die eine Vielzahl an \enquote{Machine Learning}
+-Modelle nutzten, haben ergeben, dass eine Vielzahl an Faktoren existieren,
+die das Risiko auf RTA erhöhen, wie Wetterbedingungen, Straßenkonditionen,
+Zustand des Fahrers, Lichtverhältnisse, Tageszeit und die Verkehrsdichte \cite{ml, predict}.
+\enquote{Machine Learning}-Modelle (ML) sind darauf ausgelegt, nicht anhand von
+spezifischen Anweisungen, sondern allein durch das Erkennen von Mustern und
+Abhängigkeiten mithilfe komplexer Funktionen \cite{predict} in Daten Erkenntnisse
+zu ziehen und Entscheidungen sowie Vorhersagen treffen zu können \cite{sap}.
 \medskip \\
+Unter den ML-Modellen werden künstliche neuronale Netze (KNN) für diesen
+Anwendungsfall bevorzugt, da diese keine zugrundeliegenden Beziehungen
+zwischen den Eingangsvariablen benötigen und darauf ausgelegt sind,
+mit historischen Daten Aussagen über die Zukunft treffen zu können
+\cite{predict}.
+\medskip \\
+In dieser Arbeit wird eine systematische Literaturrecherche (SLR) zur Vorhersage
+von RTAs mithilfe KNNs dargestellt. Die Ergebnisse werden im Hinblick auf deren
+Mehrwert in der Minimierung von Straßenverkehrsunfällen durch unsichere
+Straßenarchitektur untersucht und eingeordnet.
+
+\subsection{Theorie}
+
+\subsubsection{Künstliche neuronale Netze (KNN)}
 Künstliche neuronale Netze (KNN) sind ein Teilbereich der ML-Modelle. Sie können
 Entscheidungen auf ähnlicher Art und Weise treffen, wie das menschliche Gehirn \cite{ibm}.
 Das Modell besteht aus einer Vielzahl von Schichten mit unterschiedlich vielen
 Knoten. Diese Knoten sind mit anderen Knoten aus den benachbarten Schichten verbunden
 und besitzen sogenannte \enquote{weights} und \enquote{bias} \cite{ibm}.
 Eingabedaten werden von der \enquote{input layer} (Deutsch: \enquote{Eingangsschicht})
-entlang aller Schichten durchgereicht, verarbeitet und schließlich in der
-\enquote{output layer} (Deutsch: \enquote{Ausgangsschicht}) aggregiert ausgegeben \cite{ibm}.
+entlang aller hidden layer (Deutsch: \enquote{verborgene Schicht}) durchgereicht,
+verarbeitet und schließlich in der \enquote{output layer}
+(Deutsch: \enquote{Ausgangsschicht}) aggregiert ausgegeben \cite{ibm}.
 \medskip \\
-Diese Arbeit wird eine systematische Literaturrecherche (SLR) zur Vorhersage von RTAs
-mithilfe KNNs durchführen und abwägen, ob diese mit einem Mehrwert in der Minimierung
-von Straßenverkehrsunfällen durch unsichere Straßenarchitektur einhergehen.
+Zur Konfigurierung von KNN können unter anderem die Anzahl der Schichten,
+die Optimierungsverfahren (engl.: \enquote{optimizers}) und die
+Aktivierungsfunktion (engl.: \enquote{activation function}) frei gewählt werden
+\cite{actopt}.
 
 \subsection{Aktuelle Forschungslage}
-$\ll$ Ausgesuchte Literatur auflisten und den aktuellen Stand erläutern $\gg$.
+
+\subsubsection{Banerjee et al.}
+Eine Vielzahl an Klassifizierern (engl.: \enquote{classifiers}) sind mit
+KNN-Modellen bezüglich Vorhersage der Mortalität in RTAs verglichen worden. 
+Darunter gehören 
+Random Forest, Support Vector Machine, K-Nearest Neighbor Classifier,
+AdaBoost Classifier, XGBoost Classifier. Hierbei hat das KNN mit 7 
+\enquote{hidden layer}, 1 \enquote{input layer}, Adams Optimizer und einer
+\enquote{dropout class} in der Eingangsschicht die beste Genauigkeit von 84,36\% 
+erzielt \cite{akt1}.
+
+\subsubsection{Maurya et al.}
+Vorhersehen von Kraftfahrzeuggeschwindigkeiten dienen als Basis für ein
+fortgeschrittenes Verkehrsmanagementsystem \cite{akt2}. Hierbei wurden
+Lineare Regression, \enquote{random forest}-Regression, \enquote{Decision Tree} und
+ein KNN miteinander Vergleichen uns eine \enquote{Performance Analyse} durchgeführt.
+KNN und die \enquote{random forest}-Regression haben mit einem 
+\enquote{R squared}-Wert \footnote{Bestimmtheitsmaß. 
+Stellt die Anpassungsgüte einer Regression dar \cite{rsquared}}
+von jeweils 0,9301 und 0,9642 das beste Fitting erzielt \cite{akt2}.
+
+\subsubsection{Zohra et al.}
+Anhand den Datensätzen aus \enquote{US Accidents (2016-2023)} wurden ein KNN,
+ein Random Forest Klassifizierer und eine logistische Regression trainiert und
+getestet. Hier wurden jeweils Genauigkeitswerte von 81,1\%, 90,7\% und 87,03\%
+erreicht \cite{akt3}.
+
 
 \section{Methodik}
-
-Diese Arbeit führt eine SLR durch und orientiert sich
-dabei an der PRISMA-Leitlinie (Preferred Reporting Items for Systematic Reviews and
-Meta-Analyses).  PRISMA ist ein dominanter Reiter bzgl. SLR im medizinischen Sektor,
-mit dem Fachkräfte auf dem aktuellen Stand bleiben.  Die Leitlinie wird außerdem als
-Basis für zahlreiche medizinische Prozedere und Vorschriften genutzt \cite{prisma}.
+Im Folgenden wird die Vorgehensweise bei der Literaturrecherche beschrieben.
+Die Vorgehensweise orientert sich an der PRISMA-Leitlinie (Preferred Reporting
+Items for Systematic Reviews and Meta-Analyses). PRISMA hat sich ursprünglich
+als effektiver Vorreiter bzgl. SLR im medizinischen Sektor etabliert, mit dem
+Fachkräfte auf dem aktuellen Stand der Wissenschaft bleiben und bestehende
+Vorschriften aktualisiert werden \cite{prisma}. Entnehmend der zahlreichen
+SLR-Veröffentlichungen in Bereichen der Informatik (siehe Datenbanken ACM/IEEE),
+hat sich PRISMA als hilfreiches Mittel zur SLR auch in anderen
+Wissenschaftsbereichen bewiesen.
 
 \subsection{Die PRISMA-Leitlinie}
-PRISMA beinhaltet eine aus 27 Stichpunkten bestehende \enquote{Checkliste} und
-ein 4-phasiges Fluss-Diagramm. Mithilfe dieser Elemente kann sowohl Literatur 
-systematisch für die Aufnahme in einer SLR auf Eignung geprüft als auch der 
+PRISMA beinhaltet eine aus 27 Stichpunkten bestehende \enquote{Checkliste}
+und ein 4-phasiges Fluss-Diagramm \cite{prisma}. Da diese allerdings ursprünglich
+für die Medizin entwickelt wurden, werden jene auf die angepasst Informatik
+für die Basis der SLR verwendet.  Mithilfe dieser Elemente kann sowohl Literatur
+systematisch für die Aufnahme in einer SLR auf Eignung geprüft als auch der
 Prozess erleichtert und standardisiert werden.
-(Abb. \ref{fig:prisma1}).
-
-\begin{figure}[h]
-   \begin{center}
-      \includegraphics[width=250px]{Literatur/Bilder/PRISMA-Flow.png}
-   \end{center}
-   \caption{Ablauf einer SLR nach PRISMA \cite{ex1}}
-   \label{fig:prisma1}
-\end{figure}
 
 Zunächst werden Forschungsfragen aufgestellt, die im Laufe der Recherche beantwortet
-werden sollen. Im Anschluss wird dann die Literatur anhand der ausgewählten 
+werden sollen. Im Anschluss wird dann die Literatur anhand der ausgewählten
 Such-Strategie ausgewählt. Die gesammelte Literatur wird dann durch Ein- und
 Ausschlusskriterien gefiltert und auf Eignung für die SLR durch die Checkliste geprüft.
 Schließlich werden aus der eingeschlossenen Literatur qualitative und quantitative
 Daten extrahiert, mit anderer Literatur verglichen und in der eigentlichen
 Literaturanalyse zusammengetragen.
 
-
-\subsection{Recherche-Fragen}
-
-$\ll$ Fragen tabellarisch auflisten $\gg$
-
 \subsection{Prozess der Recherche}
 
-Für die Literaturrecherche sind die Datenbanken ACM Digital Library und die IEEE Explore
-beansprucht worden. Hierbei wurden die folgenden Suchstrings verwendet:
+Für die Literaturrecherche sind die Datenbanken ACM Digital Library und die
+IEEE Explore verwendet worden, da diese überwiegend Artikel in der Informatik
+veröffentlicht haben.
+Hierbei wurden die folgenden Suchstrings verwendet:
 
 \begin{tcolorbox}[
       enhanced,
@@ -154,7 +191,15 @@ den Einstellungen der Datenbank möglich.
 
 \subsection{In- und Exklusionskriterien}
 
-$\ll$ Auflisten und erläutern $\gg$
+Die für diese Arbeit relevanten Artikel sind auf solche beschränkt worden, die
+\begin{enumerate}
+   \item{eine Verkehrsdatenanalyse betreiben und diese mit einer KNN auswerten,}
+   \item{ggf. einen quantitativen Vergleich verschiedener ML-Modelle durchführen oder}
+   \item{quantitative Merkmale der KNN aufzählen.}
+\end{enumerate}
+Zu letzterem Punkt gehören Merkmale wie gewählte Netztopologie, Anzahl der Schichten,
+Anzahl der Knoten pro Schicht, gewähltes Optimierungsverfahren, die gewählte
+Aktivierungsfunktion Genauigkeit und Eingangsvariablen.
 
 \section{Ergebnisse}
 
@@ -179,7 +224,6 @@ $\ll$ Zusammenfassen $\gg$
 $\ll$ Selbsterklärend $\gg$
 
 \printbibliography
-
 \listoffigures
 \listoftables
 
