@@ -145,16 +145,17 @@ Fachkräfte auf dem aktuellen Stand der Wissenschaft bleiben und bestehende
 Vorschriften aktualisiert werden \cite{prisma}. Entnehmend der zahlreichen
 SLR-Veröffentlichungen in Bereichen der Informatik (siehe Datenbanken ACM/IEEE),
 hat sich PRISMA als hilfreiches Mittel zur SLR auch in anderen
-Wissenschaftsbereichen bewiesen.
+Wissenschaftsbereichen bewiesen und wird daher als Instrument der SLR
+in dieser Arbeit verwendet.
 
 \subsection{Die PRISMA-Leitlinie}
 PRISMA beinhaltet eine aus 27 Stichpunkten bestehende \enquote{Checkliste}
 und ein 4-phasiges Fluss-Diagramm \cite{prisma}. Da diese allerdings ursprünglich
-für die Medizin entwickelt wurden, werden jene auf die angepasst Informatik
-für die Basis der SLR verwendet.  Mithilfe dieser Elemente kann sowohl Literatur
+für die Medizin entwickelt wurden, werden jene auf die Informatik angepasst
+als Basis der SLR verwendet.  Mithilfe dieser Elemente kann sowohl Literatur
 systematisch für die Aufnahme in einer SLR auf Eignung geprüft als auch der
 Prozess erleichtert und standardisiert werden.
-
+\medskip \\
 Zunächst werden Forschungsfragen aufgestellt, die im Laufe der Recherche beantwortet
 werden sollen. Im Anschluss wird dann die Literatur anhand der ausgewählten
 Such-Strategie ausgewählt. Die gesammelte Literatur wird dann durch Ein- und
@@ -163,9 +164,22 @@ Schließlich werden aus der eingeschlossenen Literatur qualitative und quantitat
 Daten extrahiert, mit anderer Literatur verglichen und in der eigentlichen
 Literaturanalyse zusammengetragen.
 
+\subsection{Forschungsfragen}
+
+Um die Literaturrecherche zu systematisieren, werden laut PRISMA \cite{prisma}
+Forschungsfragen aufgestellt, damit ein systematisches Full-Text-Screening für
+die Eignung möglich ist. In Rahmen dieser Arbeit wurden folgende Fragen aufgestellt:
+\begin{enumerate}
+   \item{ Welche Netztopologie sind verwendet worden? }
+   \item{ Welche Genauigkeit konnte erzielt werden? }
+   \item{ Wie viele Knoten sind in den verborgenen Schichten verwendet worden?}
+   \item{ Wie lauten die Parameter des KNN (\enquote{optimizer}, \enquote{loss function} usw.) ?}
+   \item{ Welche Eingabevariablen sind gewählt worden?}
+\end{enumerate}
+
 \subsection{In- und Exklusionskriterien}
 Um gezielt die Potenz künstlicher neuronaler Netze für die Verkehrsanalyse zu
-untersuchen, sind gezielt Ein- und Ausschlusskriterien gewählt worden. Somit
+untersuchen, sind spezifische Ein- und Ausschlusskriterien gewählt worden. Somit
 wird die Anzahl der aus der Suche ergebenen Artikel reduziert und verschafft
 einen besseren Überblick.
 
@@ -229,7 +243,7 @@ werden konnte.  Zusätzlich ist die Suche auf den Inhaltstyp
 \enquote{Research Article} und die Verfügbarkeit \enquote{Open Access}
 begrenzt worden, soweit von den Einstellungen beider Datenbanken möglich.
 \medskip \\
-Die zusammengetragenen Artikel wurden im Anschluss mithilfe des PRISMA 
+Die zusammengetragenen Artikel wurden im Anschluss mithilfe des PRISMA
 Fluss-Diagramms \cite{prisma} auf Eignung überprüft (Abb. \ref{abb1}) und in einer Tabelle
 zusammengefasst (Tab. \ref{tab1}).
 
@@ -263,19 +277,35 @@ zusammengefasst (Tab. \ref{tab1}).
 
 \subsection{Diskussion}
 
-$\ll$ Forschungsfrage aufgreifen und beantworten $\gg$
+\begin{itemize}
+   \item{Interessante Differenz der Genauigkeiten}
+   \item{Auf die schlechte genauigkeit von Bao et al. eingehen}
+   \item{Allgemein aber darauf eingehen, dass KNNs in allen Artikeln die beste Genauigkeit erzielen konnten}
+   \item{Eingabevariablen vergleichen}
+   \item{Trainingsdaten vergleichen}
+   \item{Das et al. Ausreißer?}
+\end{itemize}
 
 \subsection{Limitationen}
 
-$\ll$ Grenzen dieser Arbeit auflisten $\gg$
+\begin{itemize}
+   \item{Beschränkt im betrachteten Zeitintervall}
+   \item{Unklar, welche Konfigurationen die geeignetesten sind}
+\end{itemize}
 
 \subsection{Fazit}
 
-$\ll$ Zusammenfassen $\gg$
+\begin{itemize}
+   \item{KNN als bestes Modell zum Vorhersagen von RTAs}
+   \item{Optimale Parameter sind schwer zu finden}
+\end{itemize}
 
 \subsection{Ausblick auf zukünftige Forschung}
 
-$\ll$ Selbsterklärend $\gg$
+\begin{itemize}
+   \item{Mehr Artikel mit genaueren Beschreibungen der Netze.}
+   \item{Gerne auch andere Topologien erkunden.}
+\end{itemize}
 
 \printbibliography
 \listoffigures
