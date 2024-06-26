@@ -223,39 +223,51 @@ Hierbei wurden die folgenden Suchstrings verwendet:
    OR \dq All Metadata":\dq accident")
 \end{tcolorbox}
 
-Zusätzlich ist die Suche auf den Inhaltstyp \enquote{Research Article}
-und die Verfügbarkeit \enquote{Open Access} begrenzt worden, soweit von
-den Einstellungen der Datenbank möglich.
+Bei der \enquote{IEEE-Explore}-Datenbank wurde als Zeitraum-Filter der 01.01.2023
+bis zum 31.12.2024 gewählt, da dieser nicht in den Such-String mit eingebunden
+werden konnte.  Zusätzlich ist die Suche auf den Inhaltstyp
+\enquote{Research Article} und die Verfügbarkeit \enquote{Open Access}
+begrenzt worden, soweit von den Einstellungen beider Datenbanken möglich.
+\medskip \\
+Die zusammengetragenen Artikel wurden im Anschluss mithilfe des PRISMA 
+Fluss-Diagramms \cite{prisma} auf Eignung überprüft (Abb. \ref{abb1}) und in einer Tabelle
+zusammengefasst (Tab. \ref{tab1}).
 
+\begin{figure}[h]
+   \centering
+   \caption{SLR nach PRISMA}
+   \label{abb1}
+   \includegraphics[scale=0.28]{Bilder/prisma-exported.png}
+\end{figure}
 
 \section{Ergebnisse}
 
-\begin{table}[!h]
+\begin{table}[h!]
    \centering
    \caption{Ergebnisse der Literaturrecherche}
    \label{tab1}
-   \begin{tabular}{lccccr} \toprule
-      Autoren               & Bao et al. & Das et al. & Qian et al. \\ \midrule
-      Topology              &            &            &             \\
-      Aktivierungsfunktion  &            &            &             \\
-      Verlustsfunktion      &            &            &             \\
-      Verborgene Schichten  &            &            &             \\
-      Lernrate              &            &            &             \\
-      Optimierungsverfahren &            &            &             \\
-      Genauigkeit           &            &            &             \\
-      Eingabevariablen      &            &            &             \\ \bottomrule
+   \begin{tabular}{lccc} \toprule
+      Autoren               & Qian et al. \cite{qian} & Das et al.  \cite{das} & Bao et al. \cite{bao} \\ \midrule
+      Topologie             & BPNN                    & FF                     & BPNN                  \\
+      Aktivierungsfunktion  & Softmax                 & Softmax                & Sigmoid               \\
+      Verlustsfunktion      & Cross-Entropy           & Cross-Entropy          & o.A.                  \\
+      Verborgene Knoten     & $3$                     & o.A.                   & $388$; $300 + 88$     \\
+      Lernrate              & $0.01$                  & o.A.                   & $0.005$               \\
+      Optimierungsverfahren & Gradient Descent        & Adam Optimizer         & o.A.                  \\
+      Genauigkeit           & $78.56 \%$              & $94.62 \%$             & $76.1 \%$             \\
+      Eingabevariablen      &                         &                        &                       \\ \bottomrule
    \end{tabular}
 \end{table}
-
-\subsection{Limitationen}
-
-$\ll$ Grenzen dieser Arbeit auflisten $\gg$
 
 \section{Diskussion und Fazit}
 
 \subsection{Diskussion}
 
 $\ll$ Forschungsfrage aufgreifen und beantworten $\gg$
+
+\subsection{Limitationen}
+
+$\ll$ Grenzen dieser Arbeit auflisten $\gg$
 
 \subsection{Fazit}
 
