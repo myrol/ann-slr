@@ -7,6 +7,7 @@
 \usepackage[most]{tcolorbox} % Codeblocks
 \usepackage{graphicx}
 \usepackage[bottom]{footmisc}
+\usepackage{booktabs}
 \DefineBibliographyStrings{ngerman}{ % u.a. -> et al.
    andothers = {et al\adddot}
 }
@@ -65,7 +66,7 @@ mit historischen Daten Aussagen über die Zukunft treffen zu können
 In dieser Arbeit wird eine systematische Literaturrecherche (SLR) zur Vorhersage
 von RTAs mithilfe KNNs dargestellt. Die Ergebnisse werden im Hinblick auf deren
 Mehrwert in der Minimierung von Straßenverkehrsunfällen durch unsichere
-Straßenarchitektur untersucht und eingeordnet.
+Planung der Architektur untersucht und eingeordnet.
 
 \subsection{Theorie}
 
@@ -82,9 +83,9 @@ verarbeitet und schließlich in der \enquote{output layer}
 \medskip \\
 Zur Konfigurierung von KNN können unter anderem die Anzahl der Schichten,
 die Optimierungsverfahren (engl.: \enquote{optimizers}), die
-Aktivierungsfunktion (engl.: \enquote{activation function}) und die 
+Aktivierungsfunktion (engl.: \enquote{activation function}) und die
 Verlustsfunktion (engl.: \enquote{loss function}) frei gewählt werden
-\cite{actopt}. 
+\cite{actopt}.
 \medskip \\
 Ein Optimierungsverfahren ist eine Funktion oder ein Algorithmus, welches
 Parameter der Knoten wie die Gewichte und die Lernrate (engl.: \enquote{learning rate})
@@ -96,13 +97,13 @@ Beispiele für solche Optimierungsverfahren sind der \enquote{gradient descent},
 Die Aktivierungsfunktion entscheidet, wie der kalkulierte Ausgangswert
 eines Knotens zu interpretieren ist. Dies fügt dem Netz eine Nicht-Linearität
 hinzu \cite{actopt}. Somit können die verborgenen Schichten jeweils für
-andere Bereiche der Interpretation der Daten stehen. Linearität würde auf 
+andere Bereiche der Interpretation der Daten stehen. Linearität würde auf
 der anderen Seite bedeuten, dass das Netz in eine Funktion zusammengefasst
 werden könnte \cite{actopt}. Beispiele sind die binäre \enquote{step function},
 die Sigmoid-Funktion und die \enquote{RELU}-Funktion \cite{actopt}.
 \smallskip \\
 Eine Verlustsfunktion misst, wie genau das KNN den Datensatz modelliert, indem
-es den vorliegenden Verlust (engl.: \enquote{loss}) berechnet \cite{actopt}. 
+es den vorliegenden Verlust (engl.: \enquote{loss}) berechnet \cite{actopt}.
 Gängige Funktionen sind die \enquote{Mean Squared Error}-Funktion und die
 \enquote{Binary Cross Entropy}-Funktion \cite{actopt}.
 
@@ -110,12 +111,12 @@ Gängige Funktionen sind die \enquote{Mean Squared Error}-Funktion und die
 
 \subsubsection{Banerjee et al.}
 Eine Vielzahl an Klassifizierern (engl.: \enquote{classifiers}) sind mit
-KNN-Modellen bezüglich Vorhersage der Mortalität in RTAs verglichen worden. 
-Darunter gehören 
+KNN-Modellen bezüglich Vorhersage der Mortalität in RTAs verglichen worden.
+Darunter gehören
 Random Forest, Support Vector Machine, K-Nearest Neighbor Classifier,
-AdaBoost Classifier, XGBoost Classifier. Hierbei hat das KNN mit 7 
+AdaBoost Classifier, XGBoost Classifier. Hierbei hat das KNN mit 7
 \enquote{hidden layer}, 1 \enquote{input layer}, Adams Optimizer und einer
-\enquote{dropout class} in der Eingangsschicht die beste Genauigkeit von 84,36\% 
+\enquote{dropout class} in der Eingangsschicht die beste Genauigkeit von 84,36\%
 erzielt \cite{akt1}.
 
 \subsubsection{Maurya et al.}
@@ -123,9 +124,9 @@ Vorhersehen von Kraftfahrzeuggeschwindigkeiten dienen als Basis für ein
 fortgeschrittenes Verkehrsmanagementsystem \cite{akt2}. Hierbei wurden
 Lineare Regression, \enquote{random forest}-Regression, \enquote{Decision Tree} und
 ein KNN miteinander Vergleichen uns eine \enquote{Performance Analyse} durchgeführt.
-KNN und die \enquote{random forest}-Regression haben mit einem 
-\enquote{R squared}-Wert \footnote{Bestimmtheitsmaß. 
-Stellt die Anpassungsgüte einer Regression dar \cite{rsquared}}
+KNN und die \enquote{random forest}-Regression haben mit einem
+\enquote{R squared}-Wert \footnote{Bestimmtheitsmaß.
+   Stellt die Anpassungsgüte einer Regression dar \cite{rsquared}}
 von jeweils 0,9301 und 0,9642 das beste Fitting erzielt \cite{akt2}.
 
 \subsubsection{Zohra et al.}
@@ -161,6 +162,22 @@ Ausschlusskriterien gefiltert und auf Eignung für die SLR durch die Checkliste 
 Schließlich werden aus der eingeschlossenen Literatur qualitative und quantitative
 Daten extrahiert, mit anderer Literatur verglichen und in der eigentlichen
 Literaturanalyse zusammengetragen.
+
+\subsection{In- und Exklusionskriterien}
+Um gezielt die Potenz künstlicher neuronaler Netze für die Verkehrsanalyse zu
+untersuchen, sind gezielt Ein- und Ausschlusskriterien gewählt worden. Somit
+wird die Anzahl der aus der Suche ergebenen Artikel reduziert und verschafft
+einen besseren Überblick.
+
+Die für diese Arbeit relevanten Artikel sind auf solche beschränkt worden, die
+\begin{enumerate}
+   \item{eine Verkehrsdatenanalyse untersuchen und die Daten mit einer KNN auswerten,}
+   \item{ggf. einen quantitativen Vergleich verschiedener ML-Modelle durchführen oder}
+   \item{quantitative Merkmale der KNN aufzählen.}
+\end{enumerate}
+Zu letzterem Punkt gehören Merkmale wie gewählte Netztopologie, Anzahl der Schichten,
+Anzahl der Knoten pro Schicht, gewähltes Optimierungsverfahren, die gewählte
+Aktivierungsfunktion Genauigkeit und Eingangsvariablen.
 
 \subsection{Prozess der Recherche}
 
@@ -210,21 +227,25 @@ Zusätzlich ist die Suche auf den Inhaltstyp \enquote{Research Article}
 und die Verfügbarkeit \enquote{Open Access} begrenzt worden, soweit von
 den Einstellungen der Datenbank möglich.
 
-\subsection{In- und Exklusionskriterien}
-
-Die für diese Arbeit relevanten Artikel sind auf solche beschränkt worden, die
-\begin{enumerate}
-   \item{eine Verkehrsdatenanalyse betreiben und diese mit einer KNN auswerten,}
-   \item{ggf. einen quantitativen Vergleich verschiedener ML-Modelle durchführen oder}
-   \item{quantitative Merkmale der KNN aufzählen.}
-\end{enumerate}
-Zu letzterem Punkt gehören Merkmale wie gewählte Netztopologie, Anzahl der Schichten,
-Anzahl der Knoten pro Schicht, gewähltes Optimierungsverfahren, die gewählte
-Aktivierungsfunktion Genauigkeit und Eingangsvariablen.
 
 \section{Ergebnisse}
 
-$\ll$ Erkenntnisse aus den Studien zusammentragen, auswerten und diskutieren $\gg$
+\begin{table}[!h]
+   \centering
+   \caption{Ergebnisse der Literaturrecherche}
+   \label{tab1}
+   \begin{tabular}{lccccr} \toprule
+      Autoren               & Bao et al. & Das et al. & Qian et al. \\ \midrule
+      Topology              &            &            &             \\
+      Aktivierungsfunktion  &            &            &             \\
+      Verlustsfunktion      &            &            &             \\
+      Verborgene Schichten  &            &            &             \\
+      Lernrate              &            &            &             \\
+      Optimierungsverfahren &            &            &             \\
+      Genauigkeit           &            &            &             \\
+      Eingabevariablen      &            &            &             \\ \bottomrule
+   \end{tabular}
+\end{table}
 
 \subsection{Limitationen}
 
