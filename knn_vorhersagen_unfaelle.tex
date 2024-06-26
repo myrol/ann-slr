@@ -81,9 +81,30 @@ verarbeitet und schließlich in der \enquote{output layer}
 (Deutsch: \enquote{Ausgangsschicht}) aggregiert ausgegeben \cite{ibm}.
 \medskip \\
 Zur Konfigurierung von KNN können unter anderem die Anzahl der Schichten,
-die Optimierungsverfahren (engl.: \enquote{optimizers}) und die
-Aktivierungsfunktion (engl.: \enquote{activation function}) frei gewählt werden
-\cite{actopt}.
+die Optimierungsverfahren (engl.: \enquote{optimizers}), die
+Aktivierungsfunktion (engl.: \enquote{activation function}) und die 
+Verlustsfunktion (engl.: \enquote{loss function}) frei gewählt werden
+\cite{actopt}. 
+\medskip \\
+Ein Optimierungsverfahren ist eine Funktion oder ein Algorithmus, welches
+Parameter der Knoten wie die Gewichte und die Lernrate (engl.: \enquote{learning rate})
+anpasst, um den Verlust zu minimieren, die Genauigkeit zu maximieren und
+die benötigte Trainingszeit exponentiell zu reduzieren \cite{actopt}.
+Beispiele für solche Optimierungsverfahren sind der \enquote{gradient descent},
+\enquote{RMS prop (Root Mean Square)} und \enquote{adam's optimizer} \cite{actopt}.
+\smallskip \\
+Die Aktivierungsfunktion entscheidet, wie der kalkulierte Ausgangswert
+eines Knotens zu interpretieren ist. Dies fügt dem Netz eine Nicht-Linearität
+hinzu \cite{actopt}. Somit können die verborgenen Schichten jeweils für
+andere Bereiche der Interpretation der Daten stehen. Linearität würde auf 
+der anderen Seite bedeuten, dass das Netz in eine Funktion zusammengefasst
+werden könnte \cite{actopt}. Beispiele sind die binäre \enquote{step function},
+die Sigmoid-Funktion und die \enquote{RELU}-Funktion \cite{actopt}.
+\smallskip \\
+Eine Verlustsfunktion misst, wie genau das KNN den Datensatz modelliert, indem
+es den vorliegenden Verlust (engl.: \enquote{loss}) berechnet \cite{actopt}. 
+Gängige Funktionen sind die \enquote{Mean Squared Error}-Funktion und die
+\enquote{Binary Cross Entropy}-Funktion \cite{actopt}.
 
 \subsection{Aktuelle Forschungslage}
 
