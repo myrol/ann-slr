@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage[bottom]{footmisc}
 \usepackage{booktabs}
+\usepackage[normalem]{ulem} % strikethrough
 \DefineBibliographyStrings{ngerman}{ % u.a. -> et al.
    andothers = {et al\adddot}
 }
@@ -83,7 +84,7 @@ verarbeitet und schließlich in der \enquote{output layer}
 \medskip \\
 Zur Konfigurierung von KNN können unter anderem die Anzahl der Schichten,
 die Optimierungsverfahren (engl.: \enquote{optimizers}), die
-Aktivierungsfunktion (engl.: \enquote{activation function}) und die
+Aktivierungsfunktion (engl.: \enquote{activation function}) (AF) und die
 Verlustsfunktion (engl.: \enquote{loss function}) frei gewählt werden
 \cite{actopt}.
 \medskip \\
@@ -94,7 +95,7 @@ die benötigte Trainingszeit exponentiell zu reduzieren \cite{actopt}.
 Beispiele für solche Optimierungsverfahren sind der \enquote{gradient descent},
 \enquote{RMS prop (Root Mean Square)} und \enquote{adam's optimizer} \cite{actopt}.
 \smallskip \\
-Die Aktivierungsfunktion entscheidet, wie der kalkulierte Ausgangswert
+Die AF entscheidet, wie der kalkulierte Ausgangswert
 eines Knotens zu interpretieren ist. Dies fügt dem Netz eine Nicht-Linearität
 hinzu \cite{actopt}. Somit können die verborgenen Schichten jeweils für
 andere Bereiche der Interpretation der Daten stehen. Linearität würde auf
@@ -102,7 +103,7 @@ der anderen Seite bedeuten, dass das Netz in eine Funktion zusammengefasst
 werden könnte \cite{actopt}. Beispiele sind die binäre \enquote{step function},
 die Sigmoid-Funktion und die \enquote{RELU}-Funktion \cite{actopt}.
 \smallskip \\
-Eine Verlustsfunktion misst, wie genau das KNN den Datensatz modelliert, indem
+Eine Verlustsfunktion (VF) misst, wie genau das KNN den Datensatz modelliert, indem
 es den vorliegenden Verlust (engl.: \enquote{loss}) berechnet \cite{actopt}.
 Gängige Funktionen sind die \enquote{Mean Squared Error}-Funktion und die
 \enquote{Binary Cross Entropy}-Funktion \cite{actopt}.
@@ -134,7 +135,6 @@ Anhand den Datensätzen aus \enquote{US Accidents (2016-2023)} wurden ein KNN,
 ein Random Forest Klassifizierer und eine logistische Regression trainiert und
 getestet. Hier wurden jeweils Genauigkeitswerte von 81,1\%, 90,7\% und 87,03\%
 erreicht \cite{akt3}.
-
 
 \section{Methodik}
 Im Folgenden wird die Vorgehensweise bei der Literaturrecherche beschrieben.
@@ -191,7 +191,7 @@ Die für diese Arbeit relevanten Artikel sind auf solche beschränkt worden, die
 \end{enumerate}
 Zu letzterem Punkt gehören Merkmale wie gewählte Netztopologie, Anzahl der Schichten,
 Anzahl der Knoten pro Schicht, gewähltes Optimierungsverfahren, die gewählte
-Aktivierungsfunktion Genauigkeit und Eingangsvariablen.
+AF Genauigkeit und Eingangsvariablen.
 
 \subsection{Prozess der Recherche}
 
@@ -256,29 +256,76 @@ zusammengefasst (Tab. \ref{tab1}).
 
 \section{Ergebnisse}
 
+Die Ergebnisse der Studien fallen sehr unterschiedlich aus. Sowohl Qian et al.
+als auch Das et al. beführworten die Nutzung von KNN in der Durchführung
+und Auswertung von Verkehrsanalysen (\cite{qian} S. 2744, \cite{das} S. 5),
+allerdings empfielt Bao et al., dass zukünftige Studien sich intensiver mit
+den einzelnen Faktoren der Verkehrsanalyse befassen sollten, da Verkehrsanalysen
+zu komplex sind, diese in einem Modell zusammenzufassen (\cite{bao} S. 784).
+\medskip \\
+Diese Rückschlüsse werden auch von den erreichten Genauigkeiten der KNN-Modelle
+reflektiert: Absteigend sortiert erreichte Das et al. eine Genauigkeit von 94,62\%, Qian et al. 78,56\%
+und von Bao et al. einer Genauigkeit von 69,95\% \cite{das, qian, bao}.
+\medskip \\
+Entnehmend der Tabelle \ref{tab1} gibt es dennoch einige Gemeinsamkeiten
+zwischen den Studien. Sowohl Qian et al. als auch Bao et al. verwendeten für
+ihre Netztopologie ein \enquote{back propagation neural network} (BPNN)
+(\cite{qian} S. 2739, \cite{bao} S. 782), wohingegen Das et al. als besten Kandidat
+ein \enquote{feed forward neural network} (FFNN) nominierte (\cite{das} S. 2).
+Bezüglich den Aktivierungs- und Verlustsfunktionen verwenden Qian et al.
+und Das et al. jeweils die Softmax-AF und die Cross-Entropy-VF
+(\cite{qian} S. 2742, \cite{das} S. 2).
+Bao et al. hat hier hingegen eine Sigmoid-Funktion als AF und den
+\enquote{Levenberg Marquardt}-Algorithmus als VF verwendet (\cite{bao} S. 783).
+Sowohl in der gewählten Lernrate, dem gewählten Optimierungsverfahren und den
+gewählten Eingabevariablen unterscheiden sich die drei Studien maßgeblich.
+Qian et al. nutzten 3 verborgene Knoten mit einer Lernrate von 0,01, während
+Bao et al. 388 verborgene Knoten und eine Lernrate von 0,005 für ihre Analysen
+verwendeten. Das et al. hat zu beiden Attributen keine Angeben gemacht.
+
 \begin{table}[h!]
    \centering
    \caption{Ergebnisse der Literaturrecherche}
    \label{tab1}
    \begin{tabular}{lccc} \toprule
       Autoren               & Qian et al. \cite{qian} & Das et al.  \cite{das} & Bao et al. \cite{bao} \\ \midrule
-      Topologie             & BPNN                    & FF                     & BPNN                  \\
+      Topologie             & BPNN                    & FFNN                   & BPNN                  \\
       Aktivierungsfunktion  & Softmax                 & Softmax                & Sigmoid               \\
-      Verlustsfunktion      & Cross-Entropy           & Cross-Entropy          & o.A.                  \\
-      Verborgene Knoten     & $3$                     & o.A.                   & $388$; $300 + 88$     \\
+      Verlustsfunktion      & Cross-Entropy           & Cross-Entropy          & Levenberg Marquardt   \\
+      Verborgene Knoten     & $3$                     & o.A.                   & $388$                 \\
       Lernrate              & $0.01$                  & o.A.                   & $0.005$               \\
-      Optimierungsverfahren & Gradient Descent        & Adam Optimizer         & o.A.                  \\
-      Genauigkeit           & $78.56 \%$              & $94.62 \%$             & $76.1 \%$             \\
+      Optimierungsverfahren & Gradient Descent        & Adam                   & o.A.                  \\
+      Genauigkeit           & 78,56\%                 & 94,62\%                & 69,95\%               \\
       Eingabevariablen      &                         &                        &                       \\ \bottomrule
    \end{tabular}
 \end{table}
 
 \section{Diskussion und Fazit}
 
+Im Rahmen der SLR werden im Folgenden die Ergebnisse kritisch untersucht,
+Limitationen sowohl der Studien als auch dieser SLR genannt und zusätzlich
+zum Fazit eine Empfehlung für zuküftige Forschungen im Bereich der Verwendung
+von KNN für Verkehrsanalysen ausgesprochen.
+
 \subsection{Diskussion}
 
+Alle drei inkludierten Studien sind zu maßgeblich unterschiedlichen Ergebnissen
+auf unterschiedlichen Wegen gekommen. Das et al. und Bao et al. stechen
+mit Genauigkeiten von jeweils 94,62\% und 69,95\% aus den Rechercheergebnissen
+heraus. Im Rahmen einer Verkehrsanalyse sollten die verwendeten Modelle so
+zuverlässig wie nur möglich sein, allerdings besteht die Gefahr, dass das trainierte
+Modell einem sog. \enquote{over-fitting} (OF) oder \enquote{under-fitting} (UF)
+unterliegt. OF bezeichnet eine zu starke Anpassung des Modells an die Trainingsdaten,
+weswegen es neue Daten nicht korrekt auswertet \cite{aws}.
+Dies kann unter anderem passieren, wenn die Größe der Trainingsdaten zu klein,
+die Trainingsdaten für den gewählten Klassifizierungskontext irrelevante
+Datensätze beinhalten (auch genannt \enquote{verrauschte Daten}) oder
+die Parameter des Modells zu komplex gewählt wurden \cite{aws}. Das Pendant
+dazu ist ein vorliegen eines UF. Hierbei ist das Modell zu simpel, kann
+Muster dementsprechend nicht auffassen und lernen \cite{ibm2}.
+
 \begin{itemize}
-   \item{Interessante Differenz der Genauigkeiten}
+   \item{\sout{Interessante Differenz der Genauigkeiten}}
    \item{Auf die schlechte genauigkeit von Bao et al. eingehen}
    \item{Allgemein aber darauf eingehen, dass KNNs in allen Artikeln die beste Genauigkeit erzielen konnten}
    \item{Eingabevariablen vergleichen}
