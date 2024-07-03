@@ -313,34 +313,65 @@ Alle drei inkludierten Studien sind zu maßgeblich unterschiedlichen Ergebnissen
 auf unterschiedlichen Wegen gekommen. Das et al. und Bao et al. stechen
 mit Genauigkeiten von jeweils 94,62\% und 69,95\% aus den Rechercheergebnissen
 heraus. Im Rahmen einer Verkehrsanalyse sollten die verwendeten Modelle so
-zuverlässig wie nur möglich sein, allerdings besteht die Gefahr, dass das trainierte
+zuverlässig wie möglich sein, allerdings besteht die Gefahr, dass das trainierte
 Modell einem sog. \enquote{over-fitting} (OF) oder \enquote{under-fitting} (UF)
 unterliegt. OF bezeichnet eine zu starke Anpassung des Modells an die Trainingsdaten,
 weswegen es neue Daten nicht korrekt auswertet \cite{aws}.
-Dies kann unter anderem passieren, wenn die Größe der Trainingsdaten zu klein,
-die Trainingsdaten für den gewählten Klassifizierungskontext irrelevante
-Datensätze beinhalten (auch genannt \enquote{verrauschte Daten}) oder
-die Parameter des Modells zu komplex gewählt wurden \cite{aws}. Das Pendant
-dazu ist ein vorliegen eines UF. Hierbei ist das Modell zu simpel, kann
-Muster dementsprechend nicht auffassen und lernen \cite{ibm2}.
+Dies kann unter anderem passieren, falls die Trainingsdaten für den gewählten 
+Klassifizierungskontext irrelevante Datensätze beinhalten 
+(auch genannt \enquote{verrauschte Daten}), die Größe der Trainingsdaten 
+zu klein, oder die Parameter des Modells zu komplex
+gewählt wurden \cite{aws}. Das Pendant dazu ist ein vorliegen eines UF.
+Hierbei ist das Modell zu simpel, kann Muster dementsprechend nicht auffassen
+und lernen \cite{ibm2}.
+\medskip \\
+Bao et al. erreichte auf dem Testdatensatz eine Genauigkeit von 69,95\% mit
+dem \enquote{1-Hidden-Layer}-Modell. Im Gegensatz dazu erreichte dieses Modell
+eine Genauigkeit von 76,1\% auf den Trainingsdaten (\cite{bao} S. 784).
+Es ist angemessen anzunehmen, dass das Modell mit 388 verborgenen Knoten zu
+komplex gewählt und daher einem OF unterliegt.
+Im Vergleich dazu erreichten Das et al. eine Genauigkeit von 94,62\%.
+Die hohe Differenz zu den anderen beiden Studien liegt vermutlich in der Tatsache,
+dass das Modell auf einer kleineren Menge an Eingabevariablen trainiert wurde 
+(\cite{das}, S. 3).
 
 \begin{itemize}
    \item{\sout{Interessante Differenz der Genauigkeiten}}
-   \item{Auf die schlechte genauigkeit von Bao et al. eingehen}
+   \item{\sout{Auf die schlechte genauigkeit von Bao et al. eingehen}}
    \item{Allgemein aber darauf eingehen, dass KNNs in allen Artikeln die beste Genauigkeit erzielen konnten}
-   \item{Eingabevariablen vergleichen}
+   \item{\sout{Eingabevariablen vergleichen}}
    \item{Trainingsdaten vergleichen}
-   \item{Das et al. Ausreißer?}
+   \item{\sout{Das et al. Ausreißer?}}
 \end{itemize}
 
 \subsection{Limitationen}
 
+In dieser Arbeit werden lediglich drei Studien verglichen und eignet sich
+daher nicht, eine konkrete Aussage über die Legitimität künstlicher neuronaler
+Netze im Bezug auf Verkehrsdatenanalyse zu treffen. Außerdem wurden nur
+Artikel im Zeitraum vom 01.01.2023 bis zum 01.05.2024 betrachet und 
+es konnte deswegen nur ein kleiner Einblick in die Forschung bereitet werden.
+\medskip \\
+Aufgrund der beschränkten Anzahl der Artikel konnten außerdem keine Aussage
+über neuere Netztopologien getroffen werden.
+
 \begin{itemize}
-   \item{Beschränkt im betrachteten Zeitintervall}
+   \item{\sout{Beschränkt im betrachteten Zeitintervall}}
    \item{Unklar, welche Konfigurationen die geeignetesten sind}
 \end{itemize}
 
 \subsection{Fazit}
+
+Zwei der drei betrachteten Studien beführworten die Verwendung von KNN in
+Verkehrsdatenanalyse, um die Verkehrsplanung sicherer gestalten zu können 
+und dem überliegenden Ziel der Verkehrssicherheit einen Schritt näher zu kommen.
+Die Studien verglichen verschiedene Konfigurationen der Modelle mit anderen 
+Regressionsmodellen und kamen zum Schluss, dass KNNs noch immer die beste
+Art von ML-Modellen ist, um Aussagen über die Zukunft anhand historischer
+Daten zu treffen.
+\medskip \\
+Allerdings besteht bis heute die Herausforderung, optimale Parameter von
+KNN ausfindig zu machen und richtig einzusetzen.
 
 \begin{itemize}
    \item{KNN als bestes Modell zum Vorhersagen von RTAs}
@@ -349,10 +380,10 @@ Muster dementsprechend nicht auffassen und lernen \cite{ibm2}.
 
 \subsection{Ausblick auf zukünftige Forschung}
 
-\begin{itemize}
-   \item{Mehr Artikel mit genaueren Beschreibungen der Netze.}
-   \item{Gerne auch andere Topologien erkunden.}
-\end{itemize}
+Es wird empfohlen, näher auf die Parameter der gewählten KNN-Topologien
+einzugehen und im Falle eines Vergleichs verschiedener Modelle diese auch
+ausführlich auszuführen. Zukünftige Forschung sollte zusätzlich neuere
+Topologien erforschen, wünschenswert auch eigenständige Modelle entwickeln.
 
 \printbibliography
 \listoffigures
