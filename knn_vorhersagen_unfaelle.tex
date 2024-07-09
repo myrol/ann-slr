@@ -231,13 +231,7 @@ Hierbei wurden die folgenden Suchstrings verwendet:
       boxed title style={size=small, colframe=gray, sharp corners},
       sharp corners
    ]
-   [All: "neural network?"]
-   AND [
-         [All: "traffic flow"]
-         OR [All: "traffic control"]
-         OR [All: \dq accident"]
-      ]
-   AND [E-Publication Date: (01/01/2023 TO 12/31/2024)]
+   [All: "neural network?"] AND [ [All: "traffic flow"] OR [All: "traffic control"] OR [All: \dq accident"] ] AND [E-Publication Date: (01/01/2023 TO 12/31/2024)]
 \end{tcolorbox}
 
 \begin{tcolorbox}[
@@ -275,6 +269,29 @@ zusammengefasst (Tab. \ref{tab1}).
 \end{figure}
 
 \section{Ergebnisse}
+
+\subsection{Qian et al.}
+
+Qian et al. haben eine Kombination aus einem \enquote{classification and regression trees} (CART)
+und einem \enquote{back propagation neural network} (BPNN) entwickelt und mit einer 
+logistischen Regression, AdaBoost und dem naiven Bayes Klassifizierern verglichen.
+Die Untersuchung ergab, dass das CART-BPNN-Modell mit einer Genauigkeit von 78,56\% 
+am besten abschnitt \cite{qian}.
+
+\subsection{Das et al.}
+In dieser Studie sind verschiedene KNN-Modelle verschieden-parametrisiert verglichen worden.
+Hierbei wurden Modelle mit unterschiedlichen OVs und AFs trainiert und ausgewertet. 
+Das Modell mit einer Softmax-AF und Adams Optimierungsverfahren erzielte die höchste
+Genauigkeit von 94,62\% \cite{das}.
+
+\subsection{Bao et al.}
+Ein KNN mit einer und zwei verborgenen Schicht(en), allerdings mit einer insgesamt
+gleichbleibenden Anzahl an verborgenen Knoten, sind miteinander verglichen worden.
+Der Vergleich ergab, dass zwar das Modell mit zwei Schichten geringfügig besser abschnitt
+als das Modell mit einer Schicht, allerdings um mehr als das 20-fache an Trainingszeit
+benötigte. Daher ist man zum Schluss gelangt, dass eine verborgene Schicht für diesen
+Anwendungsfall besser geeignet ist.
+
 
 \begin{table}[h!]
    \centering
@@ -319,7 +336,7 @@ und von Bao et al. einer Genauigkeit von 69,95\% \cite{das, qian, bao}.
 \medskip \\
 Entnehmend der Tabelle \ref{tab1} gibt es dennoch einige Gemeinsamkeiten
 zwischen den Studien. Sowohl Qian et al. als auch Bao et al. verwendeten für
-ihre Netztopologie ein \enquote{back propagation neural network} (BPNN)
+ihre Netztopologie ein BPNN
 (\cite{qian} S. 2739, \cite{bao} S. 782), wohingegen Das et al. als besten Kandidat
 ein \enquote{feed forward neural network} (FFNN) nominierte (\cite{das} S. 2).
 Bezüglich den Aktivierungs- und Verlustsfunktionen verwenden Qian et al.
@@ -407,8 +424,8 @@ Aufgrund der beschränkten Anzahl der Artikel konnten außerdem keine Aussage
 Alle drei Studien beführworten die Verwendung von KNN in
 Verkehrsdatenanalysen, um die Verkehrsplanung sicherer gestalten zu können
 und dem überliegenden Ziel der Verkehrssicherheit einen Schritt näher zu kommen.
-Zwei der Studien verglichen verschiedene Konfigurationen der Modelle mit anderen
-Regressionsmodellen und kamen zum Schluss, dass KNNs noch immer die zuverlässigste
+Qian et al. verglichen zusätzlich KNN-Modelle mit anderen
+Regressionsmodellen und kamen zum Schluss, dass KNNs die zuverlässigste
 Art von ML-Modellen ist, um mit historischen Daten Vorhersagen zu tätigen.
 \medskip \\
 Allerdings besteht bis heute die Herausforderung, optimale Parameter von
