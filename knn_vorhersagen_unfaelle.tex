@@ -9,6 +9,9 @@
 \usepackage[bottom]{footmisc}
 \usepackage{booktabs}
 \usepackage[normalem]{ulem} % strikethrough
+\usepackage{rotating}
+\usepackage{makecell}
+\usepackage{capt-of} % caption table
 \DefineBibliographyStrings{ngerman}{ % u.a. -> et al.
    andothers = {et al\adddot}
 }
@@ -52,17 +55,17 @@ Bedrohungen kann dazu beitragen, Baumaßnahmen unfallminimierend zu gestalten.
 Vorangehende Analysen von Verkehrsdaten, die eine Vielzahl an \enquote{Machine Learning}
 -Modelle nutzten, haben ergeben, dass eine Vielzahl an Faktoren existieren,
 die das Risiko auf RTA erhöhen, wie Wetterbedingungen, Straßenkonditionen,
-Zustand des Fahrers, Lichtverhältnisse, Tageszeit und die Verkehrsdichte \cite{ml, predict}.
+Zustand des Fahrers, Lichtverhältnisse, Tageszeit und die Verkehrsdichte \cite{das, qian}.
 \enquote{Machine Learning}-Modelle (ML) sind darauf ausgelegt, nicht anhand von
 spezifischen Anweisungen, sondern allein durch das Erkennen von Mustern und
-Abhängigkeiten mithilfe komplexer Funktionen \cite{predict} in Daten Erkenntnisse
+Abhängigkeiten mithilfe komplexer Funktionen \cite{qian} in Daten Erkenntnisse
 zu ziehen und Entscheidungen sowie Vorhersagen treffen zu können \cite{sap}.
 \medskip \\
 Unter den ML-Modellen werden künstliche neuronale Netze (KNN) für diesen
 Anwendungsfall bevorzugt, da diese keine zugrundeliegenden Beziehungen
 zwischen den Eingangsvariablen benötigen und darauf ausgelegt sind,
 mit historischen Daten Aussagen über die Zukunft treffen zu können
-\cite{predict}.
+\cite{qian}.
 \medskip \\
 In dieser Arbeit wird eine systematische Literaturrecherche (SLR) zur Vorhersage
 von RTAs mithilfe KNNs dargestellt. Die Ergebnisse werden im Hinblick auf deren
@@ -70,6 +73,9 @@ Mehrwert in der Minimierung von Straßenverkehrsunfällen durch unsichere
 Planung der Architektur untersucht und eingeordnet.
 
 \subsection{Theorie}
+
+Zunächst werden die theoretischen Grundlagen von KNN ausgeführt, um die Ergebnisse
+der Literaturrecherche in den Kontext einordnen zu können.
 
 \subsubsection{Künstliche neuronale Netze (KNN)}
 Künstliche neuronale Netze (KNN) sind ein Teilbereich der ML-Modelle. Sie können
@@ -83,7 +89,7 @@ verarbeitet und schließlich in der \enquote{output layer}
 (Deutsch: \enquote{Ausgangsschicht}) aggregiert ausgegeben \cite{ibm}.
 \medskip \\
 Zur Konfigurierung von KNN können unter anderem die Anzahl der Schichten,
-die Optimierungsverfahren (engl.: \enquote{optimizers}), die
+die Optimierungsverfahren (engl.: \enquote{optimizers}) (OV), die
 Aktivierungsfunktion (engl.: \enquote{activation function}) (AF) und die
 Verlustsfunktion (engl.: \enquote{loss function}) frei gewählt werden
 \cite{actopt}.
@@ -107,6 +113,16 @@ Eine Verlustsfunktion (VF) misst, wie genau das KNN den Datensatz modelliert, in
 es den vorliegenden Verlust (engl.: \enquote{loss}) berechnet \cite{actopt}.
 Gängige Funktionen sind die \enquote{Mean Squared Error}-Funktion und die
 \enquote{Binary Cross Entropy}-Funktion \cite{actopt}.
+
+\subsection{Historische Forschungslage}
+
+\subsubsection{Smith et al.}
+Die Anwendung eines neuronalen Netzes ist an einer Simulation einer
+\enquote{nine intersection} in Manhattan, New York untersucht worden.
+Es ergab sich eine 10-prozentige Verringerung in der Wartezeit von Fahrzeugen
+im Vergleich zur Nutzung der bereits existierenden, \enquote{in-place} Strategie \cite{smith}.
+
+\subsubsection{Folgt}
 
 \subsection{Aktuelle Forschungslage}
 
@@ -159,7 +175,7 @@ Prozess erleichtert und standardisiert werden.
 Zunächst werden Forschungsfragen aufgestellt, die im Laufe der Recherche beantwortet
 werden sollen. Im Anschluss wird dann die Literatur anhand der ausgewählten
 Such-Strategie ausgewählt. Die gesammelte Literatur wird dann durch Ein- und
-Ausschlusskriterien gefiltert und auf Eignung für die SLR durch die Checkliste geprüft.
+Ausschlusskriterien auf Eignung für die SLR durch die Checkliste geprüft.
 Schließlich werden aus der eingeschlossenen Literatur qualitative und quantitative
 Daten extrahiert, mit anderer Literatur verglichen und in der eigentlichen
 Literaturanalyse zusammengetragen.
@@ -173,7 +189,7 @@ die Eignung möglich ist. In Rahmen dieser Arbeit wurden folgende Fragen aufgest
    \item{ Welche Netztopologie sind verwendet worden? }
    \item{ Welche Genauigkeit konnte erzielt werden? }
    \item{ Wie viele Knoten sind in den verborgenen Schichten verwendet worden?}
-   \item{ Wie lauten die Parameter des KNN (\enquote{optimizer}, \enquote{loss function} usw.) ?}
+   \item{ Wie ist der Lernprozess realisiert worden? (\enquote{optimizer}, \enquote{loss function} usw.) ?}
    \item{ Welche Eingabevariablen sind gewählt worden?}
 \end{enumerate}
 
@@ -275,34 +291,52 @@ ein \enquote{feed forward neural network} (FFNN) nominierte (\cite{das} S. 2).
 Bezüglich den Aktivierungs- und Verlustsfunktionen verwenden Qian et al.
 und Das et al. jeweils die Softmax-AF und die Cross-Entropy-VF
 (\cite{qian} S. 2742, \cite{das} S. 2).
-Bao et al. hat hier hingegen eine Sigmoid-Funktion als AF und den
+Bao et al. haben hier hingegen eine Sigmoid-Funktion als AF und den
 \enquote{Levenberg Marquardt}-Algorithmus als VF verwendet (\cite{bao} S. 783).
 Sowohl in der gewählten Lernrate, dem gewählten Optimierungsverfahren und den
 gewählten Eingabevariablen unterscheiden sich die drei Studien maßgeblich.
 Qian et al. nutzten 3 verborgene Knoten mit einer Lernrate von 0,01, während
-Bao et al. 388 verborgene Knoten und eine Lernrate von 0,005 für ihre Analysen
-verwendeten. Das et al. hat zu beiden Attributen keine Angeben gemacht.
+Bao et al. 388 verborgene Knoten (\cite{bao} S. 783) und eine Lernrate von 0,005 
+für ihre Analysen verwendeten. 
+Das et al. hat zu beiden Attributen keine Werte angegeben.
+\medskip \\
+Der Tabelle \ref{tab2} entnehmend sind die Eingabevariablen der Modelle divers.
+Qian et al, Das et al. und Bao et al. haben hierbei jeweils 31, 6 und 12 
+verschiedene Variablen für ihre Modelle gewählt.
 
 \begin{table}[h!]
    \centering
-   \caption{Ergebnisse der Literaturrecherche}
    \label{tab1}
+   \caption{Ergebnisse der Literaturrecherche}
    \begin{tabular}{lccc} \toprule
-      Autoren               & Qian et al. \cite{qian} & Das et al.  \cite{das} & Bao et al. \cite{bao} \\ \midrule
-      Topologie             & BPNN                    & FFNN                   & BPNN                  \\
-      Aktivierungsfunktion  & Softmax                 & Softmax                & Sigmoid               \\
-      Verlustsfunktion      & Cross-Entropy           & Cross-Entropy          & Levenberg Marquardt   \\
-      Verborgene Knoten     & $3$                     & o.A.                   & $388$                 \\
-      Lernrate              & $0.01$                  & o.A.                   & $0.005$               \\
-      Optimierungsverfahren & Gradient Descent        & Adam                   & o.A.                  \\
-      Genauigkeit           & 78,56\%                 & 94,62\%                & 69,95\%               \\
-      Eingabevariablen      &                         &                        &                       \\ \bottomrule
+      Autoren         & Qian et al. \cite{qian} & Das et al.  \cite{das} & Bao et al. \cite{bao} \\ \midrule
+      Topologie       & BPNN                    & FFNN                   & BPNN                  \\
+      AF              & Softmax                 & Softmax                & Sigmoid               \\
+      VF              & Cross-Entropy           & Cross-Entropy          & Levenberg Marquardt   \\
+      Verborg. Knoten & $3$                     & o.A.                   & $388$                 \\
+      Lernrate        & 0.01                    & o.A.                   & 0,005                 \\
+      OV              & Gradient Descent        & Adam                   & o.A.                  \\
+      Genauigkeit     & 78,56\%                 & 94,62\%                & 69,95\%               \\
+      \bottomrule
+   \end{tabular}
+   \medskip \\
+   {\raggedright \textit{Anmerkung: \enquote{o.A.} = \enquote{ohne Angabe}} \par}
+\end{table}
+\begin{table}[h!]
+   \centering
+   \label{tab2}
+   \caption{Eingabevariablen der KNN-Modelle}
+   \begin{tabular}{lc} \toprule
+      Autoren & Eingabevariablen \\ \midrule
+      Qian et al. & \makecell[r]{Minute, Stunde, Jahr, Monat, Tag, Polizeieinsatz, Gebietsart, \\ Fahrbahngefahren, Straßensonderbedingungen, \\ Straßenoberflächenbedingungen, Wetterbedingungen, Lichtverhältnisse, \\ Fußgängerüberweg vorhanden, Straßennummer und -Klasse, \\ Krezungsverwaltung, Geschwindigkeitsbegrenzung, Straßentyp, \\ Wochentag, Anzahl Verunglückte, \\ Anzahl Fahrzeuge, Längen- und Breitengrad} \\ \midrule
+      Das et al. & \makecell[r]{Jahreszeit, Fahrzeugart des Unfallbeteiligten, Gebietsart, \\ Aufprallart, Unfallsart, Alter des Beteiligten \\ \enquote{a.m. peak}, \enquote{a.m. off-peak}, \enquote{p.m. peak}, \enquote{p.m. off-peak}} \\ \midrule
+      Bao et al. & \makecell[r]{Kreuzungsart, Unfallsortsart, Straßentyp, \\ Mittelstreifenart, Nicht-verkehrsbezogene Mittelstreifenart, \\ Straßenmaterial, Straßenkonditionen, Bürgersteigkonditionen, \\ Lichtverhältnisse, Wetterbedingungen, Sichtweite, Unfallsart} \\ \bottomrule
    \end{tabular}
 \end{table}
 
 \section{Diskussion und Fazit}
 
-Im Rahmen der SLR werden im Folgenden die Ergebnisse kritisch untersucht,
+Im Rahmen der SLR werden im Folgenden die Ergebnisse der Studien kritisch untersucht,
 Limitationen sowohl der Studien als auch dieser SLR genannt und zusätzlich
 zum Fazit eine Empfehlung für zuküftige Forschungen im Bereich der Verwendung
 von KNN für Verkehrsanalysen ausgesprochen.
@@ -317,23 +351,42 @@ zuverlässig wie möglich sein, allerdings besteht die Gefahr, dass das trainier
 Modell einem sog. \enquote{over-fitting} (OF) oder \enquote{under-fitting} (UF)
 unterliegt. OF bezeichnet eine zu starke Anpassung des Modells an die Trainingsdaten,
 weswegen es neue Daten nicht korrekt auswertet \cite{aws}.
-Dies kann unter anderem passieren, falls die Trainingsdaten für den gewählten 
-Klassifizierungskontext irrelevante Datensätze beinhalten 
-(auch genannt \enquote{verrauschte Daten}), die Größe der Trainingsdaten 
+Dies kann unter anderem passieren, falls die Trainingsdaten für den gewählten
+Klassifizierungskontext irrelevante Datensätze beinhalten
+(auch genannt \enquote{verrauschte Daten}), die Größe der Trainingsdaten
 zu klein, oder die Parameter des Modells zu komplex
 gewählt wurden \cite{aws}. Das Pendant dazu ist ein vorliegen eines UF.
 Hierbei ist das Modell zu simpel, kann Muster dementsprechend nicht auffassen
 und lernen \cite{ibm2}.
 \medskip \\
 Bao et al. erreichte auf dem Testdatensatz eine Genauigkeit von 69,95\% mit
-dem \enquote{1-Hidden-Layer}-Modell. Im Gegensatz dazu erreichte dieses Modell
+einem \enquote{1-Hidden-Layer}-Modell. Im Gegensatz zu diesem Datensatz
+erreichte dieses Modell
 eine Genauigkeit von 76,1\% auf den Trainingsdaten (\cite{bao} S. 784).
-Es ist angemessen anzunehmen, dass das Modell mit 388 verborgenen Knoten zu
-komplex gewählt und daher einem OF unterliegt.
+Es ist anzunehmen, dass das Modell mit 388 verborgenen Knoten zu
+komplex gewählt und daher einem OF unterliegen könnte.
 Im Vergleich dazu erreichten Das et al. eine Genauigkeit von 94,62\%.
 Die hohe Differenz zu den anderen beiden Studien liegt vermutlich in der Tatsache,
-dass das Modell auf einer kleineren Menge an Eingabevariablen trainiert wurde 
-(\cite{das}, S. 3).
+dass das Modell auf einer kleineren Menge an Eingabevariablen trainiert wurde
+(siehe Tabelle \ref{tab2}). Hierbei haben Das et al. mit 10 Eingabevariablen
+die wohl simpelste Eingangsschicht gewählt, konnten aber auch die höchste Genauigkeit 
+der Modellvorhersagen erzielen. Im Vergleich dazu haben Bao et al. zwei mehr und
+Qian et al. das Dreifache an Eingangsvariablen verwendet und dies trägt zur 
+Komplexität bei \cite{aws}.
+\medskip \\
+Aussagen über die gewählte Netztopologie im Bezug auf die Genauigkeitsdifferenz
+können aufgrund fehlender Angaben von Das et al. nicht getroffen werden. Es ist unklar,
+wie Das et al. die verborgene(n) Schichten konfiguriert hat.
+Das et al. haben eine relativ ähnliche Konfiguration gewählt wie Qian et al., allerdings
+mehr als 16\% höhere Genauigkeit erziehlen können.
+Durch diese Ähnlichkeiten ist unklar, ob die Eingangsvariablen
+oder die Gestaltung der verborgenen Schichten des KNN bedeutender für die Genauigkeit nach
+dem Training der Modelle sind.
+\medskip \\
+Bao et al. erläutert, dass ihr Modell aufzeigt, dass die gewählten Eingangsvariablen zu
+komplex gewählt wurden und weitere Forschung diesbzgl. benötigt sei, lässt allerdings die
+gewählten Netzwerkparameter außer acht in dieser Ausführung. Interessant wäre zu wissen,
+wie die Netze mit unterschiedlichen Anzahlen von verborgenen Knoten abschneiden.
 
 \begin{itemize}
    \item{\sout{Interessante Differenz der Genauigkeiten}}
@@ -346,10 +399,10 @@ dass das Modell auf einer kleineren Menge an Eingabevariablen trainiert wurde
 
 \subsection{Limitationen}
 
-In dieser Arbeit werden lediglich drei Studien verglichen und eignet sich
-daher nicht, eine konkrete Aussage über die Legitimität künstlicher neuronaler
+In dieser Arbeit werden lediglich drei Studien verglichen und eignet sich daher
+nicht, eine allgemeingültige Aussage über die Legitimität künstlicher neuronaler
 Netze im Bezug auf Verkehrsdatenanalyse zu treffen. Außerdem wurden nur
-Artikel im Zeitraum vom 01.01.2023 bis zum 01.05.2024 betrachet und 
+Artikel im Zeitraum vom 01.01.2023 bis zum 01.05.2024 betrachet und
 es konnte deswegen nur ein kleiner Einblick in die Forschung bereitet werden.
 \medskip \\
 Aufgrund der beschränkten Anzahl der Artikel konnten außerdem keine Aussage
@@ -363,9 +416,9 @@ Aufgrund der beschränkten Anzahl der Artikel konnten außerdem keine Aussage
 \subsection{Fazit}
 
 Zwei der drei betrachteten Studien beführworten die Verwendung von KNN in
-Verkehrsdatenanalyse, um die Verkehrsplanung sicherer gestalten zu können 
+Verkehrsdatenanalyse, um die Verkehrsplanung sicherer gestalten zu können
 und dem überliegenden Ziel der Verkehrssicherheit einen Schritt näher zu kommen.
-Die Studien verglichen verschiedene Konfigurationen der Modelle mit anderen 
+Die Studien verglichen verschiedene Konfigurationen der Modelle mit anderen
 Regressionsmodellen und kamen zum Schluss, dass KNNs noch immer die beste
 Art von ML-Modellen ist, um Aussagen über die Zukunft anhand historischer
 Daten zu treffen.

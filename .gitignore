@@ -1,4 +1,6 @@
 Literatur/
+*.synctex*
+*.synctex(busy).gz
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
