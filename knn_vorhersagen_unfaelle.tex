@@ -9,9 +9,7 @@
 \usepackage[bottom]{footmisc}
 \usepackage{booktabs}
 \usepackage[normalem]{ulem} % strikethrough
-\usepackage{rotating}
 \usepackage{makecell}
-\usepackage{capt-of} % caption table
 \DefineBibliographyStrings{ngerman}{ % u.a. -> et al.
    andothers = {et al\adddot}
 }
@@ -64,8 +62,7 @@ zu ziehen und Entscheidungen sowie Vorhersagen treffen zu können \cite{sap}.
 Unter den ML-Modellen werden künstliche neuronale Netze (KNN) für diesen
 Anwendungsfall bevorzugt, da diese keine zugrundeliegenden Beziehungen
 zwischen den Eingangsvariablen benötigen und darauf ausgelegt sind,
-mit historischen Daten Aussagen über die Zukunft treffen zu können
-\cite{qian}.
+mit historischen Daten Vorhersagen zu tätigen \cite{qian}.
 \medskip \\
 In dieser Arbeit wird eine systematische Literaturrecherche (SLR) zur Vorhersage
 von RTAs mithilfe KNNs dargestellt. Die Ergebnisse werden im Hinblick auf deren
@@ -74,8 +71,9 @@ Planung der Architektur untersucht und eingeordnet.
 
 \subsection{Theorie}
 
-Zunächst werden die theoretischen Grundlagen von KNN ausgeführt, um die Ergebnisse
-der Literaturrecherche in den Kontext einordnen zu können.
+Zunächst werden die theoretischen Grundlagen sowie die Forschungslage 
+von KNN ausgeführt, um die Ergebnisse der Literaturrecherche in den 
+Kontext einordnen zu können.
 
 \subsubsection{Künstliche neuronale Netze (KNN)}
 Künstliche neuronale Netze (KNN) sind ein Teilbereich der ML-Modelle. Sie können
@@ -95,7 +93,7 @@ Verlustsfunktion (engl.: \enquote{loss function}) frei gewählt werden
 \cite{actopt}.
 \medskip \\
 Ein Optimierungsverfahren ist eine Funktion oder ein Algorithmus, welches
-Parameter der Knoten wie die Gewichte und die Lernrate (engl.: \enquote{learning rate})
+die Gewichte der Knoten und die Lernrate (engl.: \enquote{learning rate})
 anpasst, um den Verlust zu minimieren, die Genauigkeit zu maximieren und
 die benötigte Trainingszeit exponentiell zu reduzieren \cite{actopt}.
 Beispiele für solche Optimierungsverfahren sind der \enquote{gradient descent},
@@ -122,7 +120,13 @@ Die Anwendung eines neuronalen Netzes ist an einer Simulation einer
 Es ergab sich eine 10-prozentige Verringerung in der Wartezeit von Fahrzeugen
 im Vergleich zur Nutzung der bereits existierenden, \enquote{in-place} Strategie \cite{smith}.
 
-\subsubsection{Folgt}
+\subsubsection{Edmond Chin-Ping Chang}
+Die Anwendung von einem neuronalen Netz auf \enquote{traffic engineering} wird mithilfe 
+verschiedener Sensoren und historischer Daten erforscht. Die Effektivität wird mit
+einem konventionellen Algorithmus verglichen und anschließend werden zwei neuronale Netze
+trainiert, um die Herangehensweisen beider Mittel zu kombinieren (\cite{chang} S. 642).
+Man hat herausgefunden, dass trotz dem Verlust geringfügiger Genauigkeit das Zwei-Neuronale-Netz-Modell
+sehr geeignet für das Verarbeiten von Verkehrsunfallsdaten ist (\cite{chang} S. 645).
 
 \subsection{Aktuelle Forschungslage}
 
@@ -263,7 +267,7 @@ Die zusammengetragenen Artikel wurden im Anschluss mithilfe des PRISMA
 Fluss-Diagramms \cite{prisma} auf Eignung überprüft (Abb. \ref{abb1}) und in einer Tabelle
 zusammengefasst (Tab. \ref{tab1}).
 
-\begin{figure}[h]
+\begin{figure}[h!]
    \centering
    \caption{SLR nach PRISMA}
    \label{abb1}
@@ -271,6 +275,36 @@ zusammengefasst (Tab. \ref{tab1}).
 \end{figure}
 
 \section{Ergebnisse}
+
+\begin{table}[h!]
+   \centering
+   \caption{Ergebnisse der Literaturrecherche}
+   \begin{tabular}{lccc} \toprule
+      Autoren         & Qian et al. \cite{qian} & Das et al.  \cite{das} & Bao et al. \cite{bao} \\ \midrule
+      Topologie       & BPNN                    & FFNN                   & BPNN                  \\
+      AF              & Softmax                 & Softmax                & Sigmoid               \\
+      VF              & Cross-Entropy           & Cross-Entropy          & Levenberg Marquardt   \\
+      Verborg. Knoten & $3$                     & o.A.                   & $388$                 \\
+      Lernrate        & 0.01                    & o.A.                   & 0,005                 \\
+      OV              & Gradient Descent        & Adam                   & o.A.                  \\
+      Genauigkeit     & 78,56\%                 & 94,62\%                & 69,95\%               \\
+      \bottomrule
+   \end{tabular}
+   \label{tab1}
+   \medskip \\
+   {\raggedright \textit{Anmerkung: \enquote{o.A.} = \enquote{ohne Angabe}} \par}
+\end{table}
+\begin{table}[h!]
+   \centering
+   \caption{Eingabevariablen der KNN-Modelle}
+   \begin{tabular}{lc} \toprule
+      Autoren & Eingabevariablen \\ \midrule
+      Qian et al. & \makecell[r]{Minute, Stunde, Jahr, Monat, Tag, Polizeieinsatz, Gebietsart, \\ Fahrbahngefahren, Straßensonderbedingungen, \\ Straßenoberflächenbedingungen, Wetterbedingungen, Lichtverhältnisse, \\ Fußgängerüberweg vorhanden, Straßennummer und -Klasse, \\ Krezungsverwaltung, Geschwindigkeitsbegrenzung, Straßentyp, \\ Wochentag, Anzahl Verunglückte, \\ Anzahl Fahrzeuge, Längen- und Breitengrad} \\ \midrule
+      Das et al. & \makecell[r]{Jahreszeit, Fahrzeugart des Unfallbeteiligten, Gebietsart, \\ Aufprallart, Unfallsart, Alter des Beteiligten \\ \enquote{a.m. peak}, \enquote{a.m. off-peak}, \enquote{p.m. peak}, \enquote{p.m. off-peak}} \\ \midrule
+      Bao et al. & \makecell[r]{Kreuzungsart, Unfallsortsart, Straßentyp, \\ Mittelstreifenart, Nicht-verkehrsbezogene Mittelstreifenart, \\ Straßenmaterial, Straßenkonditionen, Bürgersteigkonditionen, \\ Lichtverhältnisse, Wetterbedingungen, Sichtweite, Unfallsart} \\ \bottomrule
+   \end{tabular}
+   \label{tab2}
+\end{table}
 
 Die Ergebnisse der Studien fallen sehr unterschiedlich aus. Sowohl Qian et al.
 als auch Das et al. beführworten die Nutzung von KNN in der Durchführung
@@ -304,40 +338,10 @@ Der Tabelle \ref{tab2} entnehmend sind die Eingabevariablen der Modelle divers.
 Qian et al, Das et al. und Bao et al. haben hierbei jeweils 31, 6 und 12 
 verschiedene Variablen für ihre Modelle gewählt.
 
-\begin{table}[h!]
-   \centering
-   \label{tab1}
-   \caption{Ergebnisse der Literaturrecherche}
-   \begin{tabular}{lccc} \toprule
-      Autoren         & Qian et al. \cite{qian} & Das et al.  \cite{das} & Bao et al. \cite{bao} \\ \midrule
-      Topologie       & BPNN                    & FFNN                   & BPNN                  \\
-      AF              & Softmax                 & Softmax                & Sigmoid               \\
-      VF              & Cross-Entropy           & Cross-Entropy          & Levenberg Marquardt   \\
-      Verborg. Knoten & $3$                     & o.A.                   & $388$                 \\
-      Lernrate        & 0.01                    & o.A.                   & 0,005                 \\
-      OV              & Gradient Descent        & Adam                   & o.A.                  \\
-      Genauigkeit     & 78,56\%                 & 94,62\%                & 69,95\%               \\
-      \bottomrule
-   \end{tabular}
-   \medskip \\
-   {\raggedright \textit{Anmerkung: \enquote{o.A.} = \enquote{ohne Angabe}} \par}
-\end{table}
-\begin{table}[h!]
-   \centering
-   \label{tab2}
-   \caption{Eingabevariablen der KNN-Modelle}
-   \begin{tabular}{lc} \toprule
-      Autoren & Eingabevariablen \\ \midrule
-      Qian et al. & \makecell[r]{Minute, Stunde, Jahr, Monat, Tag, Polizeieinsatz, Gebietsart, \\ Fahrbahngefahren, Straßensonderbedingungen, \\ Straßenoberflächenbedingungen, Wetterbedingungen, Lichtverhältnisse, \\ Fußgängerüberweg vorhanden, Straßennummer und -Klasse, \\ Krezungsverwaltung, Geschwindigkeitsbegrenzung, Straßentyp, \\ Wochentag, Anzahl Verunglückte, \\ Anzahl Fahrzeuge, Längen- und Breitengrad} \\ \midrule
-      Das et al. & \makecell[r]{Jahreszeit, Fahrzeugart des Unfallbeteiligten, Gebietsart, \\ Aufprallart, Unfallsart, Alter des Beteiligten \\ \enquote{a.m. peak}, \enquote{a.m. off-peak}, \enquote{p.m. peak}, \enquote{p.m. off-peak}} \\ \midrule
-      Bao et al. & \makecell[r]{Kreuzungsart, Unfallsortsart, Straßentyp, \\ Mittelstreifenart, Nicht-verkehrsbezogene Mittelstreifenart, \\ Straßenmaterial, Straßenkonditionen, Bürgersteigkonditionen, \\ Lichtverhältnisse, Wetterbedingungen, Sichtweite, Unfallsart} \\ \bottomrule
-   \end{tabular}
-\end{table}
-
 \section{Diskussion und Fazit}
 
 Im Rahmen der SLR werden im Folgenden die Ergebnisse der Studien kritisch untersucht,
-Limitationen sowohl der Studien als auch dieser SLR genannt und zusätzlich
+Limitationen sowohl der Studien als auch dieser SLR aufgezeigt und zusätzlich
 zum Fazit eine Empfehlung für zuküftige Forschungen im Bereich der Verwendung
 von KNN für Verkehrsanalysen ausgesprochen.
 
@@ -355,9 +359,9 @@ Dies kann unter anderem passieren, falls die Trainingsdaten für den gewählten
 Klassifizierungskontext irrelevante Datensätze beinhalten
 (auch genannt \enquote{verrauschte Daten}), die Größe der Trainingsdaten
 zu klein, oder die Parameter des Modells zu komplex
-gewählt wurden \cite{aws}. Das Pendant dazu ist ein vorliegen eines UF.
-Hierbei ist das Modell zu simpel, kann Muster dementsprechend nicht auffassen
-und lernen \cite{ibm2}.
+gewählt worden sind \cite{aws}. Das Pendant dazu ist ein Vorliegen eines UF.
+Hierbei ist das Modell zu simpel und kann Muster dementsprechend nicht auffassen
+und verinnerlichen \cite{ibm2}.
 \medskip \\
 Bao et al. erreichte auf dem Testdatensatz eine Genauigkeit von 69,95\% mit
 einem \enquote{1-Hidden-Layer}-Modell. Im Gegensatz zu diesem Datensatz
@@ -369,14 +373,13 @@ Im Vergleich dazu erreichten Das et al. eine Genauigkeit von 94,62\%.
 Die hohe Differenz zu den anderen beiden Studien liegt vermutlich in der Tatsache,
 dass das Modell auf einer kleineren Menge an Eingabevariablen trainiert wurde
 (siehe Tabelle \ref{tab2}). Hierbei haben Das et al. mit 10 Eingabevariablen
-die wohl simpelste Eingangsschicht gewählt, konnten aber auch die höchste Genauigkeit 
-der Modellvorhersagen erzielen. Im Vergleich dazu haben Bao et al. zwei mehr und
-Qian et al. das Dreifache an Eingangsvariablen verwendet und dies trägt zur 
-Komplexität bei \cite{aws}.
+die wohl simpelste Eingangsschicht gewählt. Vergleichsweise haben Bao et al. zwei mehr und
+Qian et al. das Dreifache an Eingangsvariablen verwendet, wodurch die Komplexität der
+Modelle ansteigt \cite{aws}.
 \medskip \\
 Aussagen über die gewählte Netztopologie im Bezug auf die Genauigkeitsdifferenz
 können aufgrund fehlender Angaben von Das et al. nicht getroffen werden. Es ist unklar,
-wie Das et al. die verborgene(n) Schichten konfiguriert hat.
+wie Das et al. die verborgene(n) Schichten konfiguriert haben.
 Das et al. haben eine relativ ähnliche Konfiguration gewählt wie Qian et al., allerdings
 mehr als 16\% höhere Genauigkeit erziehlen können.
 Durch diese Ähnlichkeiten ist unklar, ob die Eingangsvariablen
@@ -384,52 +387,32 @@ oder die Gestaltung der verborgenen Schichten des KNN bedeutender für die Genau
 dem Training der Modelle sind.
 \medskip \\
 Bao et al. erläutert, dass ihr Modell aufzeigt, dass die gewählten Eingangsvariablen zu
-komplex gewählt wurden und weitere Forschung diesbzgl. benötigt sei, lässt allerdings die
-gewählten Netzwerkparameter außer acht in dieser Ausführung. Interessant wäre zu wissen,
+komplex gewählt wurden und weitere Forschung diesbzgl. benötigt sei (\cite{bao} S. 784), lässt allerdings die
+gewählten Netz-Topologie-Parameter außer acht in dieser Ausführung. Interessant wäre zu wissen,
 wie die Netze mit unterschiedlichen Anzahlen von verborgenen Knoten abschneiden.
-
-\begin{itemize}
-   \item{\sout{Interessante Differenz der Genauigkeiten}}
-   \item{\sout{Auf die schlechte genauigkeit von Bao et al. eingehen}}
-   \item{Allgemein aber darauf eingehen, dass KNNs in allen Artikeln die beste Genauigkeit erzielen konnten}
-   \item{\sout{Eingabevariablen vergleichen}}
-   \item{Trainingsdaten vergleichen}
-   \item{\sout{Das et al. Ausreißer?}}
-\end{itemize}
 
 \subsection{Limitationen}
 
 In dieser Arbeit werden lediglich drei Studien verglichen und eignet sich daher
 nicht, eine allgemeingültige Aussage über die Legitimität künstlicher neuronaler
 Netze im Bezug auf Verkehrsdatenanalyse zu treffen. Außerdem wurden nur
-Artikel im Zeitraum vom 01.01.2023 bis zum 01.05.2024 betrachet und
-es konnte deswegen nur ein kleiner Einblick in die Forschung bereitet werden.
+Artikel im Zeitraum vom 01.01.2023 bis zum 01.05.2024 betrachet, weswegen nur ein 
+kleiner Einblick in die Forschung bereitet werden konnte.
 \medskip \\
 Aufgrund der beschränkten Anzahl der Artikel konnten außerdem keine Aussage
 über neuere Netztopologien getroffen werden.
 
-\begin{itemize}
-   \item{\sout{Beschränkt im betrachteten Zeitintervall}}
-   \item{Unklar, welche Konfigurationen die geeignetesten sind}
-\end{itemize}
-
 \subsection{Fazit}
 
-Zwei der drei betrachteten Studien beführworten die Verwendung von KNN in
-Verkehrsdatenanalyse, um die Verkehrsplanung sicherer gestalten zu können
+Alle drei Studien beführworten die Verwendung von KNN in
+Verkehrsdatenanalysen, um die Verkehrsplanung sicherer gestalten zu können
 und dem überliegenden Ziel der Verkehrssicherheit einen Schritt näher zu kommen.
-Die Studien verglichen verschiedene Konfigurationen der Modelle mit anderen
-Regressionsmodellen und kamen zum Schluss, dass KNNs noch immer die beste
-Art von ML-Modellen ist, um Aussagen über die Zukunft anhand historischer
-Daten zu treffen.
+Zwei der Studien verglichen verschiedene Konfigurationen der Modelle mit anderen
+Regressionsmodellen und kamen zum Schluss, dass KNNs noch immer die zuverlässigste
+Art von ML-Modellen ist, um mit historischen Daten Vorhersagen zu tätigen.
 \medskip \\
 Allerdings besteht bis heute die Herausforderung, optimale Parameter von
-KNN ausfindig zu machen und richtig einzusetzen.
-
-\begin{itemize}
-   \item{KNN als bestes Modell zum Vorhersagen von RTAs}
-   \item{Optimale Parameter sind schwer zu finden}
-\end{itemize}
+KNN angepasst auf die Verkehrsanalyse ausfindig zu machen und effektiv einzusetzen.
 
 \subsection{Ausblick auf zukünftige Forschung}
 
